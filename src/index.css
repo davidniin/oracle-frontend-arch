@@ -1,0 +1,461 @@
+:root {
+      --navy: #0a1628;
+      --navy-light: #132240;
+      --navy-mid: #1a2d4a;
+      --gold: #d4a843;
+      --gold-dim: #b8922e;
+      --white: #f0f0f0;
+      --gray: #6b7a8d;
+      --green: #2ecc71;
+      --yellow: #f1c40f;
+      --blue: #3498db;
+      --red: #e74c3c;
+      --gray-status: #7f8c8d;
+      --panel-bg: #0d1d35;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', 'SF Pro Display', -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ─────────────────────────────────── */
+    .header {
+      background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+      border-bottom: 2px solid var(--gold);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-brand .logo {
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .header-brand .subtitle {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .connection-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    .connection-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      transition: background 0.3s;
+    }
+
+    .connection-dot.connected { background: var(--green); }
+
+    .clock {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .admin-btn {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .admin-btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    /* ── Toolbar ─────────────────────────────────── */
+    .toolbar {
+      background: var(--navy-light);
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(212, 168, 67, 0.15);
+    }
+
+    .search-box {
+      background: var(--navy);
+      border: 1px solid var(--navy-mid);
+      color: var(--white);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      width: 300px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus { border-color: var(--gold); }
+
+    .filter-btn {
+      background: var(--navy);
+      border: 1px solid var(--navy-mid);
+      color: var(--gray);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .flight-count {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* ── Flight Board ────────────────────────────── */
+    .board-container {
+      padding: 1.5rem 2rem;
+    }
+
+    .board-header {
+      display: grid;
+      grid-template-columns: 120px 1fr 100px 1fr 100px 180px 180px 120px 80px;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      background: var(--navy-mid);
+      border-radius: 6px 6px 0 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .board-body {
+      background: var(--navy-light);
+      border-radius: 0 0 6px 6px;
+      overflow: hidden;
+    }
+
+    .flight-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 100px 1fr 100px 180px 180px 120px 80px;
+      gap: 0.5rem;
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+      transition: background 0.3s, opacity 0.5s;
+      align-items: center;
+    }
+
+    .flight-row:hover {
+      background: rgba(212, 168, 67, 0.05);
+    }
+
+    .flight-row.updated {
+      animation: rowFlash 1.5s ease;
+    }
+
+    @keyframes rowFlash {
+      0% { background: rgba(212, 168, 67, 0.2); }
+      100% { background: transparent; }
+    }
+
+    .flight-number {
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .airport-code {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-left: 0.3rem;
+    }
+
+    .gate-info {
+      font-weight: 600;
+    }
+
+    /* ── Status Badge ────────────────────────────── */
+    .status-badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      min-width: 90px;
+      transition: all 0.4s ease;
+    }
+
+    .status-scheduled { background: rgba(127, 140, 141, 0.2); color: var(--gray-status); border: 1px solid var(--gray-status); }
+    .status-boarding { background: rgba(241, 196, 15, 0.15); color: var(--yellow); border: 1px solid var(--yellow); }
+    .status-departed { background: rgba(52, 152, 219, 0.15); color: var(--blue); border: 1px solid var(--blue); }
+    .status-in-flight { background: rgba(52, 152, 219, 0.2); color: #5dade2; border: 1px solid #5dade2; }
+    .status-landed { background: rgba(46, 204, 113, 0.15); color: var(--green); border: 1px solid var(--green); }
+    .status-delayed { background: rgba(231, 76, 60, 0.15); color: var(--red); border: 1px solid var(--red); }
+    .status-cancelled { background: rgba(127, 140, 141, 0.1); color: #95a5a6; border: 1px solid #95a5a6; text-decoration: line-through; }
+
+    /* ── Login Modal ──────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.visible { display: flex; }
+
+    .modal {
+      background: var(--navy-light);
+      border: 1px solid var(--gold-dim);
+      border-radius: 8px;
+      padding: 2rem;
+      width: 380px;
+      max-width: 90vw;
+    }
+
+    .modal h2 {
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .modal input {
+      width: 100%;
+      background: var(--navy);
+      border: 1px solid var(--navy-mid);
+      color: var(--white);
+      padding: 0.7rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      outline: none;
+    }
+
+    .modal input:focus { border-color: var(--gold); }
+
+    .modal button {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 0.8rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .modal .error-msg {
+      color: var(--red);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    /* ── Admin Panel (slide-out) ──────────────────── */
+    .admin-panel {
+      position: fixed;
+      top: 0;
+      right: -500px;
+      width: 480px;
+      height: 100vh;
+      background: var(--panel-bg);
+      border-left: 2px solid var(--gold);
+      z-index: 90;
+      transition: right 0.35s ease;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+
+    .admin-panel.open { right: 0; }
+
+    .admin-panel h3 {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-panel .close-btn {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .admin-flight-card {
+      background: var(--navy);
+      border: 1px solid var(--navy-mid);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s;
+    }
+
+    .admin-flight-card:hover { border-color: var(--gold-dim); }
+
+    .admin-flight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .admin-flight-header .fn {
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .admin-flight-header .route {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    .admin-controls {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .admin-controls select,
+    .admin-controls input {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-mid);
+      color: var(--white);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .admin-controls .save-btn {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .admin-notes {
+      margin-top: 0.5rem;
+    }
+
+    .admin-notes textarea {
+      width: 100%;
+      background: var(--navy-light);
+      border: 1px solid var(--navy-mid);
+      color: var(--white);
+      padding: 0.4rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      resize: vertical;
+      min-height: 40px;
+    }
+
+    .notes-display {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 0.3rem;
+      padding: 0.3rem 0.5rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 3px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--green);
+      color: var(--navy);
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      z-index: 200;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.error {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 1200px) {
+      .board-header, .flight-row {
+        grid-template-columns: 100px 1fr 80px 1fr 80px 140px 140px 100px 70px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* ── Scrollbar ───────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--navy-mid); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }

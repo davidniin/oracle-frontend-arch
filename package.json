@@ -1,0 +1,27 @@
+{
+  "name": "skyroute-flight-board",
+  "version": "1.0.0",
+  "description": "SkyRoute Airlines Real-Time Flight Board",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "concurrently \"node src/server.js\" \"vite --port 4300\"",
+    "build": "vite build",
+    "preview": "node src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.16.0",
+    "jsonwebtoken": "^9.0.2",
+    "sql.js": "^1.10.0",
+    "uuid": "^9.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "colorized_terminal": "2.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8",
+    "concurrently": "^9.1.0"
+  }
+}
